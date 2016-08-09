@@ -1,0 +1,41 @@
+﻿{
+    "manifest_version": 2,
+
+    "name": "Agip Digito Verificador",
+    "short_name": "AGIPDV",
+    "description": "Esta extensión completa automaticamente el campo del digito verificador, tanto para patentes de autos, como para el ABL, etc.",
+    "author": "Pablo Matías Gomez",
+    "version": "1.0.0",
+
+    "icons": {
+        "16": "images/icons/icon16.png",
+        "48": "images/icons/icon48.png",
+        "128": "images/icons/icon128.png" 
+    },
+
+    "web_accessible_resources": [
+        "images/*.*",
+        "css/styles.css",
+        "js/functions.js"
+    ],
+
+    "content_scripts": [
+        {
+            "matches": [
+                "*://*.agip.gob.ar/*"
+            ],
+
+            "js": [
+                "js/jquery-3.1.0.min.js",
+                "js/DVPatentes.js",
+                "js/ConsultaPatPage.js",
+                "js/functions.js"
+            ],
+
+            "css": [
+                "css/styles.css"
+            ]
+        }
+    ]
+}
+
