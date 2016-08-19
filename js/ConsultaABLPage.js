@@ -1,4 +1,4 @@
-var ConsultaABLPage = function() {
+var ConsultaABLPage = function(utils) {
 
 	// Init
 	(function() {
@@ -6,7 +6,8 @@ var ConsultaABLPage = function() {
 			$id: $("#fldPartida"),
 			$dv: $("#fldDv"),
 			$chkUseDv: $("#chkPartida2Dv"),
-			dvGenerator: new DVABL()
+			dvGenerator: new DVABL(),
+			utils: utils
 		})
 	})();
 

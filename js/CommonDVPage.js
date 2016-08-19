@@ -9,6 +9,9 @@ var CommonDVPage = function(options) {
 			var dv = options.dvGenerator.getDV(options.$id.val());
 			if (!isNaN(dv)) {
 				options.$dv.val(dv);
+				if (options.utils) {
+					options.utils.trackGetCodePatente(options.$id.val() + "-" + dv);
+				}
 			}
 		});
 	};

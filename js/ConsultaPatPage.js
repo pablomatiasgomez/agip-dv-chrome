@@ -1,4 +1,4 @@
-var ConsultaPatPage = function() {
+var ConsultaPatPage = function(utils) {
 
 	// Init
 	(function() {
@@ -6,7 +6,8 @@ var ConsultaPatPage = function() {
 			$id: $("#fldDominio"),
 			$dv: $("#fldDigitoVerificador"),
 			$chkUseDv: $("#chkDigitoVerificador"),
-			dvGenerator: new DVPatentes()
+			dvGenerator: new DVPatentes(),
+			utils: utils
 		})
 	})();
 

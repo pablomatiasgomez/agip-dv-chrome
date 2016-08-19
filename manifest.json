@@ -5,7 +5,7 @@
     "short_name": "AGIPDV",
     "description": "Esta extensión completa automaticamente el campo del digito verificador, tanto para patentes de autos, como para el ABL, etc.",
     "author": "Pablo Matías Gomez",
-    "version": "1.1.0",
+    "version": "1.1.1",
 
     "icons": {
         "16": "images/icons/icon16.png",
@@ -32,6 +32,7 @@
                 "js/CommonDVPage.js",
                 "js/ConsultaPatPage.js",
                 "js/ConsultaABLPage.js",
+                "js/Utils.js",
                 "js/functions.js"
             ],
 
@@ -39,6 +40,11 @@
                 "css/styles.css"
             ]
         }
-    ]
+    ],
+
+    "background": {
+        "scripts": ["js/backgroundTracking.js"],
+        "persistent": false
+    }
 }
 
