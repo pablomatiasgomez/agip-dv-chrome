@@ -48,12 +48,12 @@ var DVPatentes = function() {
 		var num1 = 0;
 		var num2 = 0;
 
-		for (i = 1; i <= 9; i+= 2) {
-			num1 += parseInt(numeros[i - 1]);
-		}
-
-		for (i = 2; i <= 8; i+= 2) {
-			num2 += parseInt(numeros[i - 1]);
+		for (i = 0; i < numeros.length; i++) {
+			if (i % 2 == 0) {
+				num1 += parseInt(numeros.charAt(i));
+			} else {
+				num2 += parseInt(numeros.charAt(i));
+			}
 		}
 
 		num1 = reduceNumber(num1);
