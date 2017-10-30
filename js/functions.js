@@ -13,7 +13,7 @@
 		isKnownPage = false;
 	}
 
-	if (isKnownPage && !utils.recommendAlertAlreadyShown()) {
+	if (isKnownPage && utils.shouldShowRecommendAlert()) {
 		utils.showRecommendAlert();
 	}
 
