@@ -1,7 +1,6 @@
 var CommonDVPage = function(options) {
 	if (!options.$id.length) throw "$id required";
 	if (!options.$dv.length) throw "$dv required";
-	if (!options.$chkUseDv.length) throw "$chkUseDv required";
 	if (!options.dvGenerator) throw "dvGenerator required";
 	if (!options.utils) throw "utils required";
 
@@ -21,7 +20,8 @@ var CommonDVPage = function(options) {
 	};
 
 	var checkCheckbox = function() {
-		if (!options.$chkUseDv.prop("checked")) {
+		// We can support cases in which the check is not present in the page.
+		if (options.$chkUseDv && options.$chkUseDv.length && !options.$chkUseDv.prop("checked")) {
 			options.$chkUseDv.click();
 		}
 	};
