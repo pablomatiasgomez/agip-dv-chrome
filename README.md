@@ -3,3 +3,7 @@
 Esta extensión completa automaticamente el campo del digito verificador, tanto para patentes de autos, como para el ABL, etc.
 
 See: https://chrome.google.com/webstore/detail/mcbihanjokabdgcbickiihbcehjbefkp
+
+## TODO:
+
+ * handle https://lb.agip.gob.ar/ConsultaPub/

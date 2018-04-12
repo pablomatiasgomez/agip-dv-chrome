@@ -38,5 +38,3 @@ var DVABL = function() {
 		getDV: getDV
 	};
 };
-
-3857448
