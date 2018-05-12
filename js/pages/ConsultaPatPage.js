@@ -5,10 +5,11 @@ var ConsultaPatPage = function(utils) {
 		new CommonDVPage({
 			$id: $("#fldDominio"),
 			$dv: $("#fldDigitoVerificador"),
+			$btnAction: $("#btnConsultar"),
 			$chkUseDv: $("#chkDigitoVerificador"),
 			dvGenerator: new DVPatentes(),
 			utils: utils
-		})
+		});
 	})();
 
 

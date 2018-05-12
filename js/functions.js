@@ -1,20 +1,31 @@
 (function() {
-	var PATH_NAME_BAJA_PATENTES = "/BajaPat";
-	var PATH_NAME_PATENTES = "/ConsultaPat";
-	var PATH_NAME_ABL = "/ConsultaABL";
+	var ACTION_BY_PATH = {
+		"/BajaPat": (utils) => {
+			BajaPatPage(utils);
+		},
+		"/ConsultaPat": (utils) => {
+			ConsultaPatPage(utils);
+		},
+		"/ConsultaABL": (utils) => {
+			ConsultaABLPage(utils);
+		},
+		"/impInmobiliario": (utils) => {
+			ConsultaImpuestoInmobiliarioPage(utils);
+		},
+		"/ConsultaPub": (utils) => {
+			ConsultaPubPage(utils);
+		},
+	};
 
 	var utils = new Utils();
-	var isKnownPage = true;
+	var isKnownPage = false;
 
-	if (location.pathname.match(PATH_NAME_BAJA_PATENTES)) {
-		BajaPatPage(utils);
-	} else if (location.pathname.match(PATH_NAME_PATENTES)) {
-		ConsultaPatPage(utils);
-	} else if (location.pathname.match(PATH_NAME_ABL)) {
-		ConsultaABLPage(utils);
-	} else {
-		isKnownPage = false;
-	}
+	Object.keys(ACTION_BY_PATH).forEach(path => {
+		if (!isKnownPage && location.pathname.toLowerCase().indexOf(path.toLowerCase()) !== -1) {
+			isKnownPage = true;
+			ACTION_BY_PATH[path](utils);
+		}
+	});
 
 	if (isKnownPage && utils.shouldShowRecommendAlert()) {
 		utils.showRecommendAlert();
