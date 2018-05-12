@@ -12,6 +12,5 @@ var ConsultaPatPage = function(utils) {
 		});
 	})();
 
-
 	return { };
 };

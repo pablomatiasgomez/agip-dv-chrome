@@ -6,10 +6,10 @@ var ConsultaImpuestoInmobiliarioPage = function(utils) {
 			$id: $("#partida"),
 			$dv: $("#dv"),
 			$btnAction: $("#botonConsultar"),
+			$chkUseDv: null, // This page doesn't have a checkbox. DV already visible
 			additionalTrackingFields: {
 				"year": $("#anio")
 			},
-			$chkUseDv: null, // This page doesn't have a checkbox. DV already visible
 			dvGenerator: new DVABL(),
 			utils: utils
 		});
