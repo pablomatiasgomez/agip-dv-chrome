@@ -1,5 +1,7 @@
 var Utils = function() {
 
+	var TRACKING_URL = "http://www.pablomatiasgomez.com.ar/agipdv/track.php";
+
 	var RECOMMEND_ALERT_SHOWN_STORAGE_KEY = "agipdv.recommendAlertAlreadyShown";
 	var EXTENSION_TIMES_USED_STORAGE_KEY = "agipdv.timesUsed";
 	var MIN_TIMES_USED_TO_SHOW_RECOMMEND_ALERT = 10;
@@ -14,24 +16,28 @@ var Utils = function() {
 	};
 	timesUsed = incrementAndGetTimesUsed();
 
-	var trackGetCodePatente = function(patente) {
-		postData(location.href, patente);
+	var trackGeneratedDv = function(key, dv, additionalData) {
+		var data = key + "-" + dv;
+		if (additionalData) {
+			data += " - " + additionalData;
+		}
+		postData(location.href, data);
 	};
 
-	var postData = function(url, patente) {
+	var postData = function(url, data) {
 		var getQueryStringKeyValue = function(key, value) {
 			return key + "=" + encodeURIComponent(value) + "&";
 		};
 	
-		var data = "";
-		data += getQueryStringKeyValue("url", url);
-		data += getQueryStringKeyValue("patente", patente);
+		var body = "";
+		body += getQueryStringKeyValue("url", url);
+		body += getQueryStringKeyValue("data", data);
 
 		chrome.runtime.sendMessage({
 			method: 'POST',
 			action: 'xhttp',
-			url: 'http://siga.web44.net/github/add.php',
-			data: data
+			url: TRACKING_URL,
+			data: body
 		}, function(responseText) {	});
 	};
 
@@ -55,7 +61,7 @@ var Utils = function() {
 	};
 
 	return {
-		trackGetCodePatente: trackGetCodePatente,
+		trackGeneratedDv: trackGeneratedDv,
 
 		shouldShowRecommendAlert: shouldShowRecommendAlert,
 		showRecommendAlert: showRecommendAlert

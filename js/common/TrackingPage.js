@@ -14,9 +14,9 @@ var TrackingPage = function(options) {
 				}
 			});
 			if (Object.keys(additionalTrackingFields).length) {
-				options.utils.trackGetCodePatente(options.$id.val() + "-" + options.$dv.val() + " - " + JSON.stringify(additionalTrackingFields));
+				options.utils.trackGeneratedDv(options.$id.val(), options.$dv.val(), JSON.stringify(additionalTrackingFields));
 			} else {
-				options.utils.trackGetCodePatente(options.$id.val() + "-" + options.$dv.val());
+				options.utils.trackGeneratedDv(options.$id.val(), options.$dv.val());
 			}
 		});
 	};
