@@ -13,6 +13,7 @@ var DVABL = function() {
 		var i;
 
 		partida = partida.toString().toUpperCase().replace(" ", "").replace("-", "");
+		if (partida.length == 6) partida = "0" + partida;
 		if (partida.length != 7) return NaN;
 
 		var sum = 0;
