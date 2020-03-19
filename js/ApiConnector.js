@@ -2,7 +2,6 @@ let ApiConnector = function () {
 
 	const CLIENT = "CHROME@" + chrome.runtime.getManifest().version;
 	const BASE_API_URL = "http://www.pablomatiasgomez.com.ar/agipdv/v1";
-	//const BASE_API_URL = "http://localhost:8080/agipdv/v1";
 
 	let logMessage = function (method, isError, message) {
 		return postData(BASE_API_URL + "/log", {
