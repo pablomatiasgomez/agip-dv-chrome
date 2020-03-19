@@ -1,19 +1,22 @@
-var ConsultaImpuestoInmobiliarioPage = function(utils) {
+/**
+ * Handler for /impInmobiliario
+ * This page doesn't have a checkbox, it already asks for a dv so we don't need to provide a chkUseDv here.
+ * @return {Promise<*>}
+ */
+let ConsultaImpuestoInmobiliarioPage = function (utils) {
 
 	// Init
-	(function() {
-		new CommonDVPage({
+	return Promise.resolve().then(() => {
+		return CommonDVPage({
 			$id: $("#partida"),
 			$dv: $("#dv"),
 			$btnAction: $("#botonConsultar"),
-			$chkUseDv: null, // This page doesn't have a checkbox. DV already visible
+			$chkUseDv: null,
 			additionalTrackingFields: {
 				"year": $("#anio")
 			},
 			dvGenerator: new DVABL(),
 			utils: utils
 		});
-	})();
-
-	return { };
+	});
 };

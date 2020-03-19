@@ -1,8 +1,12 @@
-var ConsultaPatPage = function(utils) {
+/**
+ * Handler for /ConsultaPat
+ * @return {Promise<*>}
+ */
+let ConsultaPatPage = function (utils) {
 
 	// Init
-	(function() {
-		new CommonDVPage({
+	return Promise.resolve().then(() => {
+		return CommonDVPage({
 			$id: $("#fldDominio"),
 			$dv: $("#fldDigitoVerificador"),
 			$btnAction: $("#btnConsultar"),
@@ -10,7 +14,5 @@ var ConsultaPatPage = function(utils) {
 			dvGenerator: new DVPatentes(),
 			utils: utils
 		});
-	})();
-
-	return { };
+	});
 };

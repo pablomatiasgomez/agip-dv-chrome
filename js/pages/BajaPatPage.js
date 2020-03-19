@@ -1,19 +1,22 @@
-var BajaPatPage = function(utils) {
+/**
+ * Handler for /BajaPat
+ * This page doesn't have a checkbox, it already asks for a dv so we don't need to provide a chkUseDv here.
+ * @return {Promise<*>}
+ */
+let BajaPatPage = function (utils) {
 
 	// Init
-	(function() {
-		new CommonDVPage({
+	return Promise.resolve().then(() => {
+		return CommonDVPage({
 			$id: $("#fldDominio"),
 			$dv: $("#fldDigitoVerificador"),
 			$btnAction: $("#btnConsultar"),
-			$chkUseDv: null, // This page doesn't have a checkbox. DV already visible
+			$chkUseDv: null,
 			additionalTrackingFields: {
 				"fechaBaja": $("#fechaBaja")
 			},
 			dvGenerator: new DVPatentes(),
 			utils: utils
 		});
-	})();
-
-	return { };
+	});
 };

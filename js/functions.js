@@ -1,34 +1,27 @@
-(function() {
-	var ACTION_BY_PATH = {
-		"/BajaPat": (utils) => {
-			BajaPatPage(utils);
-		},
-		"/ConsultaPat": (utils) => {
-			ConsultaPatPage(utils);
-		},
-		"/ConsultaABL": (utils) => {
-			ConsultaABLPage(utils);
-		},
-		"/impInmobiliario": (utils) => {
-			ConsultaImpuestoInmobiliarioPage(utils);
-		},
-		"/ConsultaPub": (utils) => {
-			ConsultaPubPage(utils);
-		},
+(function () {
+	let apiConnector = new ApiConnector();
+	let utils = new Utils(apiConnector);
+	let handler = null;
+
+	const PAGE_HANDLERS = {
+		"/BajaPat": () => BajaPatPage(utils),
+		"/ConsultaPat": () => ConsultaPatPage(utils),
+		"/ConsultaABL": () => ConsultaABLPage(utils),
+		"/impInmobiliario": () => ConsultaImpuestoInmobiliarioPage(utils),
+		"/ConsultaPub": () => ConsultaPubPage(utils),
 	};
 
-	var utils = new Utils();
-	var isKnownPage = false;
-
-	Object.keys(ACTION_BY_PATH).forEach(path => {
-		if (!isKnownPage && location.pathname.toLowerCase().indexOf(path.toLowerCase()) !== -1) {
-			isKnownPage = true;
-			ACTION_BY_PATH[path](utils);
+	Object.entries(PAGE_HANDLERS).forEach(entry => {
+		if (!handler && window.location.pathname.toLowerCase().startsWith(entry[0].toLowerCase())) {
+			handler = entry[1];
 		}
 	});
 
-	if (isKnownPage && utils.shouldShowRecommendAlert()) {
-		utils.showRecommendAlert();
-	}
+	handler && handler().then(() => {
+		return utils.showDonateAlert();
+	}).catch(e => {
+		console.error("Error when handling page " + window.location.href, e);
+		return apiConnector.logMessage("Handle page " + window.location.pathname, true, utils.stringifyError(e));
+	});
 
 })();

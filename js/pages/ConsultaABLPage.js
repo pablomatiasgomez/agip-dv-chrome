@@ -1,8 +1,12 @@
-var ConsultaABLPage = function(utils) {
+/**
+ * Handler for /ConsultaABL
+ * @return {Promise<*>}
+ */
+let ConsultaABLPage = function (utils) {
 
 	// Init
-	(function() {
-		new CommonDVPage({
+	return Promise.resolve().then(() => {
+		return CommonDVPage({
 			$id: $("#fldPartida"),
 			$dv: $("#fldDv"),
 			$btnAction: $("#btnConsultar"),
@@ -10,7 +14,5 @@ var ConsultaABLPage = function(utils) {
 			dvGenerator: new DVABL(),
 			utils: utils
 		});
-	})();
-
-	return { };
+	});
 };
