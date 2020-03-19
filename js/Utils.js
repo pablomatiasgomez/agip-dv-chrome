@@ -1,69 +1,60 @@
-var Utils = function() {
+let Utils = function (apiConnector) {
 
-	var TRACKING_URL = "http://www.pablomatiasgomez.com.ar/agipdv/track.php";
+	const EXTENSION_TIMES_USED_STORAGE_KEY = "AgipDv.TimesUsed";
+	const DONATE_ALERT_SHOWN_STORAGE_KEY = "AgipDv.DonateAlertShown";
+	const MIN_TIMES_USED_TO_SHOW_DONATE_ALERT = 10;
 
-	var RECOMMEND_ALERT_SHOWN_STORAGE_KEY = "agipdv.recommendAlertAlreadyShown";
-	var EXTENSION_TIMES_USED_STORAGE_KEY = "agipdv.timesUsed";
-	var MIN_TIMES_USED_TO_SHOW_RECOMMEND_ALERT = 10;
-	var timesUsed;
-
-	var incrementAndGetTimesUsed = function() {
-		var timesUsed = JSON.parse(localStorage.getItem(EXTENSION_TIMES_USED_STORAGE_KEY)) || 0;
+	let incrementAndGetTimesUsed = function () {
+		let timesUsed = JSON.parse(localStorage.getItem(EXTENSION_TIMES_USED_STORAGE_KEY)) || 0;
 		timesUsed++;
 		localStorage.setItem(EXTENSION_TIMES_USED_STORAGE_KEY, JSON.stringify(timesUsed));
-		console.log(timesUsed);
 		return timesUsed;
 	};
-	timesUsed = incrementAndGetTimesUsed();
 
-	var trackGeneratedDv = function(key, dv, additionalData) {
-		var data = key + "-" + dv;
+	let donateAlertAlreadyShown = function () {
+		return JSON.parse(localStorage.getItem(DONATE_ALERT_SHOWN_STORAGE_KEY)) === true;
+	};
+
+	let setDonateAlertShown = function () {
+		localStorage.setItem(DONATE_ALERT_SHOWN_STORAGE_KEY, JSON.stringify(true));
+	};
+
+	/**
+	 * An alert will be shown only if:
+	 * - the times this method was called is more than {@link MIN_TIMES_USED_TO_SHOW_DONATE_ALERT}
+	 * - the alert was not shown before.
+	 */
+	let showDonateAlert = function () {
+		let timesUsed = incrementAndGetTimesUsed();
+		if (timesUsed < MIN_TIMES_USED_TO_SHOW_DONATE_ALERT || donateAlertAlreadyShown()) return;
+
+		setDonateAlertShown();
+		apiConnector.logMessage("donateAlertShown", false, JSON.stringify({url: window.location.href}));
+		if (confirm(`Hola!\n\nEspero que disfrutes la extensión que autocompleta el digito verificador!\n\n¿Te gustaría dejarme una donación? No hay minimo!`)) {
+			window.open('https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=7Z8VU5GP8BLY2&source=url', '_blank');
+			return apiConnector.logMessage("donateAlertExit", false, JSON.stringify({opened: true}));
+		} else {
+			return apiConnector.logMessage("donateAlertExit", false, JSON.stringify({opened: false}));
+		}
+	};
+
+	let trackGeneratedDv = function (key, dv, additionalData) {
+		let data = key + "-" + dv;
 		if (additionalData) {
 			data += " - " + additionalData;
 		}
-		postData(location.href, data);
+		return apiConnector.logMessage("trackGeneratedDv", false, data);
 	};
 
-	var postData = function(url, data) {
-		var getQueryStringKeyValue = function(key, value) {
-			return key + "=" + encodeURIComponent(value) + "&";
-		};
-	
-		var body = "";
-		body += getQueryStringKeyValue("url", url);
-		body += getQueryStringKeyValue("data", data);
-
-		chrome.runtime.sendMessage({
-			method: 'POST',
-			action: 'xhttp',
-			url: TRACKING_URL,
-			data: body
-		}, function(responseText) {	});
-	};
-
-	var recommendAlertAlreadyShown = function() {
-		return JSON.parse(localStorage.getItem(RECOMMEND_ALERT_SHOWN_STORAGE_KEY)) === true;
-	};
-
-	var shouldShowRecommendAlert = function() {
-		return timesUsed >= MIN_TIMES_USED_TO_SHOW_RECOMMEND_ALERT && !recommendAlertAlreadyShown();
-	};
-
-	var showRecommendAlert = function() {
-		localStorage.setItem(RECOMMEND_ALERT_SHOWN_STORAGE_KEY, JSON.stringify(true));
-		postData(location.href, "recommendAlertShown");
-		if (confirm('Hola!\n\nEspero que disfrutes la extensión que autocompleta el digito verificador!\n\n¿Te gustaría dejarme una recomendación en el store?')) {
-			window.open('https://chrome.google.com/webstore/detail/agip-digito-verificador/mcbihanjokabdgcbickiihbcehjbefkp/reviews', '_blank');
-			postData(location.href, "recommendAlertOpen=true");
-		} else {
-			postData(location.href, "recommendAlertOpen=false");
-		}
+	let stringifyError = function (error) {
+		if (error instanceof Error) return error.toString() + "\n" + error.stack;
+		if (typeof error === 'object') return JSON.stringify(error);
+		return error;
 	};
 
 	return {
+		showDonateAlert: showDonateAlert,
 		trackGeneratedDv: trackGeneratedDv,
-
-		shouldShowRecommendAlert: shouldShowRecommendAlert,
-		showRecommendAlert: showRecommendAlert
+		stringifyError: stringifyError,
 	};
 };

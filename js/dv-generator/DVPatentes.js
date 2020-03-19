@@ -1,5 +1,5 @@
-var DVPatentes = function() {
-	var numberByLetter = {
+let DVPatentes = function () {
+	let numberByLetter = {
 		A: "14",
 		B: "01",
 		C: "00",
@@ -28,31 +28,22 @@ var DVPatentes = function() {
 		Z: "17"
 	};
 
-	var getDV = function(patente) {
-		var reduceNumber = function(n) {
-			while (!isNaN(n) && n.toString().length > 1){
-				n = n.toString().split("").reduce(function(a, b) { return parseInt(a) + parseInt(b); });
-			}
-			return n;
-		};
-
-		var i;
-
+	let getDV = function (patente) {
 		patente = patente.toUpperCase().replace(" ", "").replace("-", "");
 
-		var numeros = patente;
-		Object.keys(numberByLetter).forEach(function(letter) {
-			numeros = numeros.replace(new RegExp(letter, 'g'), numberByLetter[letter]);
+		let numbers = patente;
+		Object.keys(numberByLetter).forEach(letter => {
+			numbers = numbers.replace(new RegExp(letter, 'g'), numberByLetter[letter]);
 		});
 
-		var num1 = 0;
-		var num2 = 0;
+		let num1 = 0;
+		let num2 = 0;
 
-		for (i = 0; i < numeros.length; i++) {
-			if (i % 2 == 0) {
-				num1 += parseInt(numeros.charAt(i));
+		for (let i = 0; i < numbers.length; i++) {
+			if (i % 2 === 0) {
+				num1 += parseInt(numbers.charAt(i));
 			} else {
-				num2 += parseInt(numeros.charAt(i));
+				num2 += parseInt(numbers.charAt(i));
 			}
 		}
 
@@ -60,6 +51,16 @@ var DVPatentes = function() {
 		num2 = reduceNumber(num2);
 
 		return num1.toString() + num2.toString();
+	};
+
+	/**
+	 * Given a number with many digits, sums all of them, recursively until the number has only 1 digit.
+	 */
+	let reduceNumber = function (n) {
+		while (!isNaN(n) && n.toString().length > 1) {
+			n = n.toString().split("").map(num => parseInt(num)).reduce((a, b) => a + b, 0);
+		}
+		return n;
 	};
 
 	return {

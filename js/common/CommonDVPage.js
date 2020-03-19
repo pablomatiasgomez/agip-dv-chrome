@@ -1,4 +1,4 @@
-var CommonDVPage = function(options) {
+let CommonDVPage = function (options) {
 	if (!options.$id.length) throw "$id required";
 	if (!options.$dv.length) throw "$dv required";
 	if (!options.$btnAction) throw "$btnAction required";
@@ -6,20 +6,10 @@ var CommonDVPage = function(options) {
 	if (!options.dvGenerator) throw "dvGenerator required";
 	if (!options.utils) throw "utils required";
 
-	var trackingPage = new TrackingPage({
-		$id: options.$id,
-		$dv: options.$dv,
-		$btnAction: options.$btnAction,
-		additionalTrackingFields: options.additionalTrackingFields,
-		utils: options.utils
-	});
-	var lastDv = null;
-
-	var bindEvents = function() {
-		var fn = function() {
-			var dv = options.dvGenerator.getDV(options.$id.val());
-			if (!isNaN(dv) && dv !== lastDv) {
-				lastDv = dv;
+	let bindEvents = function () {
+		let fn = function () {
+			let dv = options.dvGenerator.getDV(options.$id.val());
+			if (!isNaN(dv)) {
 				options.$dv.val(dv);
 			}
 		};
@@ -27,7 +17,7 @@ var CommonDVPage = function(options) {
 		options.$id.on("change", fn);
 	};
 
-	var checkCheckbox = function() {
+	let checkCheckbox = function () {
 		// We can support cases in which the check is not present in the page.
 		if (options.$chkUseDv && options.$chkUseDv.length && !options.$chkUseDv.prop("checked")) {
 			options.$chkUseDv.click();
@@ -35,9 +25,17 @@ var CommonDVPage = function(options) {
 	};
 
 	// Init
-	(function() {
+	return Promise.resolve().then(() => {
 		checkCheckbox();
 		bindEvents();
-	})();
+	}).then(() => {
+		return TrackingHelper({
+			$id: options.$id,
+			$dv: options.$dv,
+			$btnAction: options.$btnAction,
+			additionalTrackingFields: options.additionalTrackingFields,
+			utils: options.utils
+		});
+	});
 };
 
