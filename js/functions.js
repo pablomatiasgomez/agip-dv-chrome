@@ -8,6 +8,7 @@
 		"/ConsultaPat": () => ConsultaPatPage(utils),
 		"/ConsultaABL": () => ConsultaABLPage(utils),
 		"/impInmobiliario": () => ConsultaImpuestoInmobiliarioPage(utils),
+		"/vir": () => ConsultaVIRPage(utils),
 		"/ConsultaPub": () => ConsultaPubPage(utils),
 	};
 

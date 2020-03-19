@@ -16,6 +16,3 @@ Esta extensión completa automaticamente el campo del digito verificador, tanto 
 See: https://chrome.google.com/webstore/detail/mcbihanjokabdgcbickiihbcehjbefkp
 
 ## TODO:
-
- * handle https://lb.agip.gob.ar/vir/
- * handle https://lb.agip.gob.ar/ConsultaPub/
