@@ -3,7 +3,7 @@
 echo "Building app.."
 
 JS_FILES="\
-js/jquery-3.4.1.min.js \
+js/jquery-3.6.0.min.js \
 js/Utils.js \
 js/ApiConnector.js \
 js/dv-generator/DVPatentes.js \
@@ -16,7 +16,7 @@ js/pages/ConsultaABLPage.js \
 js/pages/ConsultaImpuestoInmobiliarioPage.js \
 js/pages/ConsultaVIRPage.js \
 js/pages/ConsultaPubPage.js \
-js/functions.js"
+js/main.js"
 cat $JS_FILES > js/agipdv.min.js
 
 echo "Build finished."

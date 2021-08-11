@@ -1,7 +1,7 @@
 let ApiConnector = function () {
 
-	const CLIENT = "CHROME@" + chrome.runtime.getManifest().version;
-	const BASE_API_URL = "http://www.pablomatiasgomez.com.ar/agipdv/v1";
+	const CLIENT = `CHROME@${chrome.runtime.getManifest().version}`;
+	const BASE_API_URL = "https://www.pablomatiasgomez.com.ar/agipdv/v1";
 
 	let logMessage = function (method, isError, message) {
 		return postData(BASE_API_URL + "/log", {
@@ -27,10 +27,7 @@ let ApiConnector = function () {
 
 	let makeRequest = function (options) {
 		return new Promise((resolve, reject) => {
-			chrome.runtime.sendMessage(options, response => (response && response.error) ? reject(response.error) : resolve(response));
-		}).catch(e => {
-			console.error("Error while making request", e);
-			throw e;
+			chrome.runtime.sendMessage(options, response => (response && response.errorStr) ? reject(new Error(response.errorStr)) : resolve(response));
 		});
 	};
 
