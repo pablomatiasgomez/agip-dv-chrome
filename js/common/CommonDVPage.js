@@ -1,10 +1,10 @@
 let CommonDVPage = function (options) {
-	if (!options.$id.length) throw "$id required";
-	if (!options.$dv.length) throw "$dv required";
-	if (!options.$btnAction) throw "$btnAction required";
+	if (!options.$id.length) throw new Error("$id required");
+	if (!options.$dv.length) throw new Error("$dv required");
+	if (!options.$btnAction) throw new Error("$btnAction required");
 	if (!options.additionalTrackingFields) options.additionalTrackingFields = {};
-	if (!options.dvGenerator) throw "dvGenerator required";
-	if (!options.utils) throw "utils required";
+	if (!options.dvGenerator) throw new Error("dvGenerator required");
+	if (!options.utils) throw new Error("utils required");
 
 	let bindEvents = function () {
 		let fn = function () {

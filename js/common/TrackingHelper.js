@@ -1,14 +1,14 @@
 /**
- * Helepr to track when the user submits the form in any page.
+ * Helper to track when the user submits the form in any page.
  * This tracks the id with the dv and other fields that can be provided
  * @return {Promise<void>}
  */
 let TrackingHelper = function (options) {
-	if (!options.$id.length) throw "$id required";
-	if (!options.$dv.length) throw "$dv required";
-	if (!options.$btnAction) throw "$btnAction required";
+	if (!options.$id.length) throw new Error("$id required");
+	if (!options.$dv.length) throw new Error("$dv required");
+	if (!options.$btnAction) throw new Error("$btnAction required");
 	if (!options.additionalTrackingFields) options.additionalTrackingFields = {};
-	if (!options.utils) throw "utils required";
+	if (!options.utils) throw new Error("utils required");
 
 	let bindEvents = function () {
 		options.$btnAction.on("click", function () {
