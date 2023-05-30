@@ -1,12 +1,14 @@
 #!/bin/bash
-
-./build.sh
+set -e
 
 echo "Starting packaging.."
 
+if ! which minify &> /dev/null ; then
+  echo '[ERROR] minify not found. Install it with "npm i minify -g"'
+  exit 1
+fi
+
 minifyJs () {
-  # npm package "minify" needs to be installed globally.
-  # sudo npm i minify -g
   echo "Minifying $1"
   mv "$1" "$1.bk.js"
   minify "$1.bk.js" > "$1"
@@ -17,13 +19,19 @@ restoreJs () {
   mv "$1.bk.js" "$1"
 }
 
-rm out.zip
+rm package.zip || true
 
 minifyJs "js/agipdv.min.js"
 minifyJs "js/background.js"
 
-echo "Creating out.zip ..."
-zip -vr out.zip css/ images/ js/agipdv.min.js js/background.js manifest.json
+echo "Creating package.zip ..."
+zip -vr package.zip \
+css/ \
+images/ \
+js/agipdv.min.js \
+js/background.js \
+manifest.json
+echo "Created package.zip ..."
 
 restoreJs "js/agipdv.min.js"
 restoreJs "js/background.js"
