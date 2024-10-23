@@ -1,5 +1,6 @@
 /**
- * Handler for /ConsultaABL
+ * Handler for /ConsultaABL/
+ *
  * @return {Promise<*>}
  */
 let ConsultaABLPage = function (utils) {
@@ -12,7 +13,7 @@ let ConsultaABLPage = function (utils) {
 			$btnAction: $("#btnConsultar"),
 			$chkUseDv: $("#chkPartida2Dv"),
 			dvGenerator: new DVABL(),
-			utils: utils
+			utils: utils,
 		});
 	});
 };

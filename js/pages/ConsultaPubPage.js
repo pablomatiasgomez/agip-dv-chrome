@@ -1,7 +1,7 @@
 /**
- * Handler for /ConsultaPub. Unfortunately we don't know how this dv is generated so for now we are just tracking.
+ * Handler for /ConsultaPub/
+ * Unfortunately we don't know how this dv is generated so for now we are just tracking.
  * @return {Promise<*>}
-
  */
 let ConsultaPubPage = function (utils) {
 
@@ -11,7 +11,7 @@ let ConsultaPubPage = function (utils) {
 			$id: $("#fldAnuncio"),
 			$dv: $("#fldDigitoVerificador"),
 			$btnAction: $("#btnConsultar"),
-			utils: utils
+			utils: utils,
 		});
 	});
 };

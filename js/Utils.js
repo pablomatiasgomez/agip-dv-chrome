@@ -11,7 +11,7 @@ let Utils = function (apiConnector) {
 
 	let trackGeneratedDv = function (key, dv, additionalData) {
 		let timesUsed = incrementAndGetTimesUsed();
-		let message = `[Path:${window.location.pathname.toLowerCase()}] [TimesUsed:${timesUsed}] [${key}-${dv}]`;
+		let message = `[Path:${window.location.pathname}] [TimesUsed:${timesUsed}] [${key}-${dv}]`;
 		if (additionalData) {
 			message += " - " + additionalData;
 		}

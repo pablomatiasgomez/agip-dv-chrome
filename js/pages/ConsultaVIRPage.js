@@ -13,7 +13,7 @@ let ConsultaVIRPage = function (utils) {
 			$btnAction: $("#btnConsultar"),
 			$chkUseDv: null,
 			dvGenerator: new DVABL(),
-			utils: utils
+			utils: utils,
 		});
 	});
 };

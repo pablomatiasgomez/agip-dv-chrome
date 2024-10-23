@@ -1,5 +1,6 @@
 /**
- * Handler for /ConsultaPat
+ * Handler for /ConsultaPat/
+ *
  * @return {Promise<*>}
  */
 let ConsultaPatPage = function (utils) {
@@ -12,7 +13,7 @@ let ConsultaPatPage = function (utils) {
 			$btnAction: $("#btnConsultar"),
 			$chkUseDv: $("#chkDigitoVerificador"),
 			dvGenerator: new DVPatentes(),
-			utils: utils
+			utils: utils,
 		});
 	});
 };

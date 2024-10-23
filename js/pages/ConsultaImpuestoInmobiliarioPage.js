@@ -1,5 +1,5 @@
 /**
- * Handler for /impInmobiliario
+ * Handler for /impInmobiliario/
  * This page doesn't have a checkbox, it already asks for a dv so we don't need to provide a chkUseDv here.
  * @return {Promise<*>}
  */
@@ -16,7 +16,7 @@ let ConsultaImpuestoInmobiliarioPage = function (utils) {
 				"year": $("#anio")
 			},
 			dvGenerator: new DVABL(),
-			utils: utils
+			utils: utils,
 		});
 	});
 };
