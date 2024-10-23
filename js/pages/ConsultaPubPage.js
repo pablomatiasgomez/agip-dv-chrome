@@ -1,16 +1,18 @@
 /**
  * Handler for /ConsultaPub/
- * Unfortunately we don't know how this dv is generated so for now we are just tracking.
+ * "Anuncios Publicitarios" uses the same DV as "Patentes"
  * @return {Promise<*>}
  */
 let ConsultaPubPage = function (utils) {
 
 	// Init
 	return Promise.resolve().then(() => {
-		return TrackingHelper({
+		return CommonDVPage({
 			$id: $("#fldAnuncio"),
 			$dv: $("#fldDigitoVerificador"),
 			$btnAction: $("#btnConsultar"),
+			$chkUseDv: $("#chkDigitoVerificador"),
+			dvGenerator: new DVPatentes(),
 			utils: utils,
 		});
 	});
