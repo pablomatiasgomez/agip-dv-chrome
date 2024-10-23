@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "Agip Digito Verificador",
   "short_name": "AgipDv",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "description": "Esta extensión completa automaticamente el campo del digito verificador, tanto para patentes de autos, como para el ABL, etc.",
   "author": "Pablo Matías Gomez",
   "icons": {
