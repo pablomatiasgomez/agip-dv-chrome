@@ -5,6 +5,7 @@ echo "Building app.."
 
 JS_FILES="\
 js/jquery-3.6.0.min.js \
+js/embrace-web-sdk-1.8.0.js \
 js/Utils.js \
 js/ApiConnector.js \
 js/dv-generator/DVPatentes.js \
