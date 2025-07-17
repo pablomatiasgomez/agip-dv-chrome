@@ -11,6 +11,17 @@ let Utils = function (apiConnector) {
 
 	let trackGeneratedDv = function (key, dv, additionalData) {
 		let timesUsed = incrementAndGetTimesUsed();
+
+		window.EmbraceWebSdk.log.message("Generated DV", 'info', {
+			attributes: {
+				path: window.location.pathname,
+				timesUsed: timesUsed,
+				key: key,
+				dv: dv,
+				additionalData: additionalData
+			}
+		});
+
 		let message = `[Path:${window.location.pathname}] [TimesUsed:${timesUsed}] [${key}-${dv}]`;
 		if (additionalData) {
 			message += " - " + additionalData;
