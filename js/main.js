@@ -1,5 +1,5 @@
 (function () {
-	window.EmbraceWebSdk.sdk.initSDK({
+	window.EmbraceWebSdk.initSDK({
 		appID: 'v9bby',
 		appVersion: chrome.runtime.getManifest().version,
 	});

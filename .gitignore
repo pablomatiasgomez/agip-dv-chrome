@@ -2,4 +2,7 @@
 .DS_Store
 package.zip
 
-js/agipdv.min.js
+embrace-token
+
+js/**/*min.js
+js/**/*.js.map

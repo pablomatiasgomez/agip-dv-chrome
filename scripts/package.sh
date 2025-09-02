@@ -7,6 +7,10 @@ if ! which uglifyjs &> /dev/null ; then
   echo '[ERROR] uglifyjs not found. Install it with "npm install uglify-js -g"'
   exit 1
 fi
+if ! which embrace-web-cli &> /dev/null ; then
+  echo '[ERROR] embrace-web-cli not found. Install it with "npm install @embrace-io/web-cli -g"'
+  exit 1
+fi
 
 uglifyJsFile () {
   echo "Uglifying $1"
@@ -23,6 +27,9 @@ rm package.zip || true
 
 uglifyJsFile "js/agipdv.min.js"
 uglifyJsFile "js/background.js"
+
+echo "Uploading Embrace symbol files..."
+embrace-web-cli upload -a "v9bby" -t "$(cat embrace-token)" -p "js/"
 
 echo "Creating package.zip ..."
 zip -vr package.zip \
