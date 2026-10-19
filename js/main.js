@@ -2,13 +2,6 @@
 	window.EmbraceWebSdk.initSDK({
 		appID: 'v9bby',
 		appVersion: chrome.runtime.getManifest().version,
-		instrumentations: [
-			window.EmbraceWebSdk.getNavigationInstrumentation(),
-		],
-	});
-	window.EmbraceWebSdk.getNavigationInstrumentation().setCurrentRoute({
-		url: window.location.pathname,
-		path: window.location.pathname
 	});
 
 	let apiConnector = new ApiConnector();
